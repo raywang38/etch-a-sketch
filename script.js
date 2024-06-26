@@ -30,6 +30,7 @@ for (let i = 0; i < 16 * 16; i++) {
 
     clearButton.addEventListener("click", () => {
         squareDiv.style.backgroundColor = "lightGray";
+        squareDiv.style.opacity = 0.1;
     })
 }
 
@@ -68,6 +69,7 @@ selectGrid.addEventListener("click", () => {
         
             clearButton.addEventListener("click", () => {
                 squareDiv.style.backgroundColor = "lightGray";
+                squareDiv.style.opacity = 0.1;
             })    
         }
     }
