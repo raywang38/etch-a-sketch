@@ -33,38 +33,39 @@ for (let i = 0; i < 16 * 16; i++) {
 
 selectGrid.addEventListener("click", () => {
 
-    let gridNumber;
-    do {
-        gridNumber = prompt("Please enter the number of squares for the grid", "");
-        gridNumber = parseInt(gridNumber);
-    } while (gridNumber < 0 || gridNumber > 100 /*|| typeof(gridNumber) == "number"*/)
+    let gridNumber = prompt("Please enter the number of squares for the grid, between 0 and 100 inclusive.", "");
+    gridNumber = parseInt(gridNumber);
+    alert(typeof(gridNumber));
 
-    const removedSquares = document.querySelectorAll(".originalSquare, .modifiedSquare");
-
-    for (const removedSquare of removedSquares) {
-        removedSquare.remove();
+    if (isNaN(gridNumber) || gridNumber < 0 || gridNumber > 100) {
+        alert("That is not a valid number");
     }
+    else {
+        const removedSquares = document.querySelectorAll(".originalSquare, .modifiedSquare");
 
-    container.style.width = gridNumber * 32 + "px";
-
-    for (let j = 0; j < gridNumber * gridNumber; j++) {
-        const squareDiv = document.createElement("div");
-        squareDiv.style.backgroundColor = "lightGray";
-        squareDiv.style.minWidth = "30px";
-        squareDiv.style.minHeight = "30px";
-        squareDiv.style.borderColor = "black";
-        squareDiv.style.borderWidth = "1px";
-        squareDiv.style.borderStyle = "solid";
-        squareDiv.setAttribute("class", "modifiedSquare");
-        container.appendChild(squareDiv);
-        
-        squareDiv.addEventListener("mouseover", () => {
-            squareDiv.style.backgroundColor = "black";
-        })
+        for (const removedSquare of removedSquares) {
+            removedSquare.remove();
+        }
     
-        clearButton.addEventListener("click", () => {
+        for (let j = 0; j < gridNumber * gridNumber; j++) {
+            const squareDiv = document.createElement("div");
             squareDiv.style.backgroundColor = "lightGray";
-        })    
+            squareDiv.style.minWidth = 512 / gridNumber - 2 + "px";
+            squareDiv.style.minHeight = 512 / gridNumber - 2 + "px";
+            squareDiv.style.borderColor = "black";
+            squareDiv.style.borderWidth = "1px";
+            squareDiv.style.borderStyle = "solid";
+            squareDiv.setAttribute("class", "modifiedSquare");
+            container.appendChild(squareDiv);
+            
+            squareDiv.addEventListener("mouseover", () => {
+                squareDiv.style.backgroundColor = "black";
+            })
+        
+            clearButton.addEventListener("click", () => {
+                squareDiv.style.backgroundColor = "lightGray";
+            })    
+        }
     }
 })
 
