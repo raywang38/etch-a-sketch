@@ -19,11 +19,13 @@ for (let i = 0; i < 16 * 16; i++) {
     squareDiv.style.borderColor = "black";
     squareDiv.style.borderWidth = "1px";
     squareDiv.style.borderStyle = "solid";
+    squareDiv.style.opacity = 0.1;
     squareDiv.setAttribute("class", "originalSquare");
     container.appendChild(squareDiv);
 
     squareDiv.addEventListener("mouseover", () => {
-        squareDiv.style.backgroundColor = "black";
+        squareDiv.style.backgroundColor = getRandomColor();
+        squareDiv.style.opacity = parseFloat(squareDiv.style.opacity) + 0.1;
     })
 
     clearButton.addEventListener("click", () => {
@@ -35,7 +37,6 @@ selectGrid.addEventListener("click", () => {
 
     let gridNumber = prompt("Please enter the number of squares for the grid, between 0 and 100 inclusive.", "");
     gridNumber = parseInt(gridNumber);
-    alert(typeof(gridNumber));
 
     if (isNaN(gridNumber) || gridNumber < 0 || gridNumber > 100) {
         alert("That is not a valid number");
@@ -55,11 +56,14 @@ selectGrid.addEventListener("click", () => {
             squareDiv.style.borderColor = "black";
             squareDiv.style.borderWidth = "1px";
             squareDiv.style.borderStyle = "solid";
+            squareDiv.style.opacity = 0.1;
+
             squareDiv.setAttribute("class", "modifiedSquare");
             container.appendChild(squareDiv);
             
             squareDiv.addEventListener("mouseover", () => {
-                squareDiv.style.backgroundColor = "black";
+                squareDiv.style.backgroundColor = getRandomColor();
+                squareDiv.style.opacity = parseFloat(squareDiv.style.opacity) + 0.1;
             })
         
             clearButton.addEventListener("click", () => {
@@ -68,4 +72,13 @@ selectGrid.addEventListener("click", () => {
         }
     }
 })
+
+function getRandomColor() {
+    let letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
 
